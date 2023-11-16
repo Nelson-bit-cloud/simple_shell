@@ -206,7 +206,6 @@ int built_env_list(info_t *);
 char **environ_copy(info_t *);
 int del_env(info_t *, char *);
 int init_env(info_t *, char *, char *);
-char *find_pathtwo(info_t *, char *, char *);
 
 /* toem_past_event.c */
 char *read_history_file(info_t *info);
