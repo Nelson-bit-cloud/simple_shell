@@ -66,6 +66,7 @@ int locate_builtin(info_t *info)
 		{"unsetenv", unset_env},
 		{"cd", cd_process},
 		{"alias", copy_alias},
+		{"/bin/ls", execute_ls},
 		{NULL, NULL}
 	};
 

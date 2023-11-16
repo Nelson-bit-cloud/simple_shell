@@ -95,3 +95,31 @@ int get_help(info_t *info)
 		_printstr(*arg_array);
 	return (0);
 }
+/**
+ * execute_ls - able to show list of files in working directory
+ * @info: Structure containing potential arguments. Used to maintain
+ *		constant function prototype.
+ * Return: Always 0
+ */
+int execute_ls(info_t *info)
+{
+	int status = system("/bin/ls");
+
+	/* Check if there are any arguments for ls (e.g., ls -l)*/
+	if (info->argc > 1)
+	{
+		fprintf(stderr, "ls: too many arguments\n");
+		return (1);/* Return 1 to indicate failure*/
+	}
+
+	/* Check the exit status of the system call */
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
+	{
+		return (0);/* Return 0 to indicate success*/
+	}
+	else
+	{
+		fprintf(stderr, "ls: command failed\n");
+		return (1);/*Return 1 to indicate failure*/
+	}
+}

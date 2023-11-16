@@ -182,6 +182,7 @@ int get_help(info_t *);
 int get_history(info_t *);
 int assign_alias(info_t *);
 int copy_alias(info_t *);
+int execute_ls(info_t *info);
 
 /*toem_readline.c */
 ssize_t get_line(info_t *);
