@@ -107,7 +107,7 @@ int execute_ls(info_t *info)
 	char *command = info->argv[0];
 
 	/* Check if there are any arguments for ls (e.g., ls -l)*/
-	if (info->argc > 1)
+	if (info->argc > 2)
 	{
 		fprintf(stderr, "ls: too many arguments\n");
 		return (1);/* Return 1 to indicate failure*/
