@@ -108,6 +108,7 @@ void get_cmd(info_t *info)
 		return;
 	/*Find the full path of the command in PATH*/
 	path = find_path(info, retrieve_env(info, "PATH="), info->argv[0]);
+	printf("Resolve path: %s\n", path);
 	if (path)
 	{
 		info->path = path;

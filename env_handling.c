@@ -95,3 +95,53 @@ int init_env(info_t *info, char *var, char *value)
 	info->env_changed = 1;/*Set flag indicate that env was changed*/
 	return (0);
 }
+/**
+ * *find_pathtwo - this fuction is able to find path
+ * @info: Structure containing potential arguments. Used to maintain
+ *        constant function prototype.
+ * @path_env: handle path of directory
+ * @command: able to handle any command
+ * Return: Always 0
+ */
+char *find_pathtwo(info_t *info, char *path_env, char *command)
+{
+	char *path_copy, *token, *full_path;
+	size_t command_len, path_len;
+	(void)info;
+
+	if (!path_env || !command)
+		return (NULL);
+
+	path_copy = dup_str(path_env);
+	if (!path_copy)
+	{
+	perror("dup_str");
+	exit(EXIT_FAILURE);
+	}
+	command_len = str_len(command);
+	token = strtok(path_copy, ":");
+
+	while (token != NULL)
+	{
+	path_len = str_len(token);
+	full_path = malloc(path_len + command_len + 2);
+	if (!full_path)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+	str_copy(full_path, token);
+	_strconcat(full_path, "/");
+	_strconcat(full_path, command);
+
+	if (access(full_path, X_OK) == 0)
+	{
+		free(path_copy);/*found the executable,free temporary copy*/
+		return (full_path);
+	}
+	free(full_path);
+	token = strtok(NULL, ":");/*Move on to the next directory in PATH*/
+	}
+	free(path_copy);
+	return (NULL);
+}

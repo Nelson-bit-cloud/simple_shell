@@ -104,17 +104,20 @@ int get_help(info_t *info)
 int execute_ls(info_t *info)
 {
 	int status;
+	char *command;
 	char *token = strtok(info->argv[0], " ");
-	char *command = token;
-	char *argument = token;
+	char *argument;
 
 	/* Check if there are any arguments for ls (e.g., ls -l)*/
-	if (info->argc > 1)
+	if (info->argc > 2)
 	{
 		fprintf(stderr, "ls: too many arguments\n");
 		return (1);/* Return 1 to indicate failure*/
 	}
-	token = strtok(NULL, "");
+
+	command = token;
+	token = strtok(NULL, " ");
+	argument = token;
 
 	if (argument != NULL)
 	{
@@ -122,7 +125,7 @@ int execute_ls(info_t *info)
 	}
 	else
 	{
-		status = system("/bin/ls -l");
+		status = system("/bin/ls");
 	}
 
 	/* Check the exit status of the system call */
